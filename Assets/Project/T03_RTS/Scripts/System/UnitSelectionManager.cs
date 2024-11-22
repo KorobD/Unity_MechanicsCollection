@@ -31,7 +31,7 @@ namespace T03 {
 
         private void Update() {
 
-            if (Input.GetMouseButtonDown(1)) {
+            if (Input.GetMouseButtonDown(0)) {
 
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -82,13 +82,11 @@ namespace T03 {
             if (unitsSelected.Contains(unit) == false) {
 
                 unitsSelected.Add(unit);
-                TriggerSelectionIndicator(unit, true);
-                EnableUnitMovement(unit, true);
+                SelectUnit(unit, true);
 
             } else {
 
-                EnableUnitMovement(unit, false);
-                TriggerSelectionIndicator(unit, false);
+                SelectUnit(unit, false);
                 unitsSelected.Remove(unit);
             
             }
@@ -99,8 +97,7 @@ namespace T03 {
 
             DeselectAll();
             unitsSelected.Add(unit);
-            TriggerSelectionIndicator(unit, true);
-            EnableUnitMovement(unit, true);
+            SelectUnit(unit, true);
 
         }
 
@@ -110,15 +107,12 @@ namespace T03 {
 
         }
 
-        private void DeselectAll() {
+        public void DeselectAll() {
             foreach (var unit in unitsSelected) {
 
-                EnableUnitMovement(unit, false);
-                TriggerSelectionIndicator(unit, false);
+                SelectUnit(unit, false);
 
             }
-
-            groundMarker.SetActive(false);
 
             unitsSelected.Clear();
 
@@ -128,6 +122,25 @@ namespace T03 {
         
             unit.transform.GetChild(1).gameObject.SetActive(isVisible);
         
+        }
+
+        private void SelectUnit(GameObject unit, bool isSelected) {
+
+            TriggerSelectionIndicator(unit, isSelected);
+            EnableUnitMovement(unit, isSelected);
+
+        }
+
+        internal void DragSelect(GameObject unit) {
+
+            if (unitsSelected.Contains(unit) == false) {
+
+                unitsSelected.Add(unit);
+                SelectUnit(unit, true);
+
+
+            }
+
         }
     }
 

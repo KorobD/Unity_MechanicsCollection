@@ -23,7 +23,7 @@ namespace T03 {
 
         private void Move() {
 
-            if (Input.GetMouseButtonDown(0)) {
+            if (Input.GetMouseButtonDown(1)) {
 
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
