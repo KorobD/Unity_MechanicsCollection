@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class UIManager {
     
+    //Menu
     public static void ShowMenu(GameObject menu) {
 
         menu.SetActive(true);
@@ -14,6 +17,7 @@ public static class UIManager {
     
     }
 
+    //Cursor
     public static void ShowCursor() {
 
         Cursor.lockState = CursorLockMode.Confined;
@@ -28,12 +32,19 @@ public static class UIManager {
 
     }
 
-    public static Vector3 GetMouseWorldPosition() {
+    public static Vector3 GetCursorWorldPosition() {
 
         Vector3 vec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         vec.z = 0f;
         return vec;
 
+    }
+
+    //Button
+    public static void ButtonLoadScene(Button button, ScenesList scene) {
+    
+        button.onClick.AddListener(() => { Loader.Load(scene); });
+    
     }
 
 }

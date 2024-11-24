@@ -28,7 +28,7 @@ namespace T02 {
         private void Shot() {
 
             GameObject bullet = _poolObjects.CreateObject(_weapon.position, Quaternion.identity);
-            Vector3 shootDir = (UIManager.GetMouseWorldPosition() - _weapon.position).normalized;
+            Vector3 shootDir = (UIManager.GetCursorWorldPosition() - _weapon.position).normalized;
             float currentDamage = _playerBonuses.GetModifiedDamage();
             bullet.GetComponent<Bullet>().Setup(shootDir, _bulletSpeed, currentDamage);
         
